@@ -163,3 +163,6 @@ end-to-end predictive system.
 [miguel]: <miguel.gonzalez@estudiants.urv.cat>
 [miriam]: <miriam.cegarra@estudiants.urv.cat>
 [pol]: <pol.jardi@estudiants.urv.cat>
+
+## Collaborators notes
+We loaded the coronary dataset, which contains 4,238 rows and 16 columns, and observed that the target variable is imbalanced, with approximately 15% positive cases. To improve clarity and avoid misunderstandings among collaborators, we renamed the variables using more descriptive names. We then removed around 500 rows containing missing values. After cleaning the data, we checked for negative values in variables where they are not physiologically plausible. Finally, we explored the presence of outliers using boxplots and interquartile range (IQR) calculations.
