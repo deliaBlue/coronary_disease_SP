@@ -166,3 +166,12 @@ end-to-end predictive system.
 
 ## Collaborators notes
 Collaborator 1: We loaded the coronary dataset, which contains 4,238 rows and 16 columns, and observed that the target variable is imbalanced, with approximately 15% positive cases. To improve clarity and avoid misunderstandings among collaborators, we renamed the variables using more descriptive names. We then removed around 500 rows containing missing values. After cleaning the data, we checked for negative values in variables where they are not physiologically plausible. Finally, we explored the presence of outliers using boxplots and interquartile range (IQR) calculations.
+
+
+Collaborator 3: The continuous variables were standardized using z‑score normalization to ensure that all features operated on a comparable scale (mean ≈ 0, standard deviation ≈ 1). This step stabilizes distance‑based relationships, prevents scale‑driven dominance in correlation analysis, and prepares the dataset for interpretable modeling. A pre‑normalization summary confirmed the heterogeneity of the original scales, while post‑normalization checks validated that the transformation was applied correctly across all numerical variables.
+
+A full correlation matrix and heatmap were computed to identify linear dependencies between predictors. Several moderate correlations were observed, and one strong relationship emerged between systolic blood pressure and pulse pressure (r = 0.86). This association is clinically expected, as pulse pressure is derived from systolic and diastolic blood pressure. Beyond this physiological dependency, no additional pairs exceeded the high‑correlation threshold (|r| ≥ 0.8), indicating limited multicollinearity in the dataset.
+
+Feature selection focused on removing redundant or overlapping predictors while preserving clinically meaningful information. The variable *cigs_per_day* was dropped because its information was fully captured by the engineered feature *smoker_intensity*, which better represents smoking exposure. All remaining variables were retained, including both systolic blood pressure and pulse pressure, as they provide complementary insights into cardiovascular physiology. The final cleaned dataset contains 17 well‑defined features, free from unnecessary redundancy and ready for downstream modeling.
+
+Overall, this section delivers a normalized dataset, a clear correlation analysis, and a transparent, clinically grounded feature‑selection process that ensures stability, interpretability, and reproducibility for subsequent modeling steps.
