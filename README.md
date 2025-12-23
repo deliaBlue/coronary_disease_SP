@@ -41,7 +41,7 @@ understand patterns. To do so, the different tasks are:
 
 - Encode categorical variables
 - Decide whether ordinal variables need special handling
-- Create simple derived features (if/when useful)
+- Create derived features
 - Produce some plots
 - Check separability between control and cases
 
@@ -167,6 +167,10 @@ end-to-end predictive system.
 ## Collaborators notes
 Collaborator 1: We loaded the coronary dataset, which contains 4,238 rows and 16 columns, and observed that the target variable is imbalanced, with approximately 15% positive cases. To improve clarity and avoid misunderstandings among collaborators, we renamed the variables using more descriptive names. We then removed around 500 rows containing missing values. After cleaning the data, we checked for negative values in variables where they are not physiologically plausible. Finally, we explored the presence of outliers using boxplots and interquartile range (IQR) calculations.
 
+Collaborator 2: 
+Two derived features were created to capture clinically meaningful information beyond the raw variables. Smoker intensity was defined as the product of current smoking status and the number of cigarettes smoked per day, allowing differentiation between non-smokers, light smokers, and heavy smokers, while assigning zero exposure to non-smokers. Pulse pressure was computed as the difference between systolic and diastolic blood pressure and serves as an indicator of arterial stiffness and cardiovascular risk. These engineered features aim to incorporate interaction effects and physiological relationships that may not be fully captured by individual variables alone.
+
+Exploratory data analysis was conducted to examine the relationship between baseline characteristics and ten-year coronary heart disease (CHD) status. Age, pulse pressure and systolic blood pressure show the strongest univariate associations with CHD, with distributions for CHD cases shifted toward higher values compared to non-CHD cases. However, substantial overlap remains, indicating only moderate separability when these variables are considered individually. Other continuous variables, including diastolic blood pressure, body mass index, glucose, and total cholesterol, exhibit weaker differences and considerable overlap between groups. Categorical variables such as sex, prevalent hypertension, blood pressure medication use, and diabetes suggest associations with CHD risk, although small subgroup sizes and class imbalance limit their standalone discriminatory power. Overall, no single variable clearly separates CHD from non-CHD cases, highlighting the need for multivariable modeling to capture combined effects.
 
 Collaborator 3: The continuous variables were standardized using z‑score normalization to ensure that all features operated on a comparable scale (mean ≈ 0, standard deviation ≈ 1). This step stabilizes distance‑based relationships, prevents scale‑driven dominance in correlation analysis, and prepares the dataset for interpretable modeling. A pre‑normalization summary confirmed the heterogeneity of the original scales, while post‑normalization checks validated that the transformation was applied correctly across all numerical variables.
 
