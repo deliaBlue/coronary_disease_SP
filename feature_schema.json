@@ -1,0 +1,18 @@
+[
+    "sex",
+    "age",
+    "education_level",
+    "current_smoker",
+    "bp_meds",
+    "prevalent_stroke",
+    "prevalent_hypertension",
+    "diabetes",
+    "total_cholesterol",
+    "systolic_bp",
+    "diastolic_bp",
+    "bmi",
+    "heart_rate",
+    "glucose",
+    "smoker_intensity",
+    "pulse_pressure"
+]
