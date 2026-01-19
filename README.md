@@ -8,9 +8,15 @@ markers or features.
 
 ## Table of Contents
 
-1. [Stages of the Project](#stages-of-the-project)
-2. [Collaborators](#collaborators)
+1. [Repository Structure](#repository-structure)
+2. [Stages of the Project](#stages-of-the-project)
 3. [Per Stage Notes](#per-stage-notes)
+4. [Collaborators](#collaborators)
+
+## Repository Structure
+
+ADD STRUCTURE
+
 
 ## Stages of the Project
 
@@ -145,16 +151,6 @@ so, the different tasks are:
 The final output is going to be a complete report with a demo video, and the
 end-to-end predictive system.
 
-## Collaborators
-
-- [Pol Jardí Yanes][pol] | Data understanding and cleaning | Final integration
-- [Johanna Albers][johanna] | Feature engineering and EDA | Final integration
-- [Miguel González González][miguel] | Normalization and correlation | Final integration
-- [César Merino Fidalgo][cesar] | Model development | Final integration
-- [Miriam Cegarra Cuquerella][miriam] | Validation and model selection | Final integration
-- [Iris Mestres Pascual][iris] | API Development | Final integration
-- [Jan Carreras Boada][jan] | Deployment | Final integration
-
 ## Per Stage Notes
 
 ### Data Understanding and Cleaning
@@ -277,6 +273,17 @@ The final model was trained on the full dataset and exported as
 ### API Development
 
 ### Deployment
+
+
+## Collaborators
+
+- [Pol Jardí Yanes][pol] | Data understanding and cleaning | Final integration
+- [Johanna Albers][johanna] | Feature engineering and EDA | Final integration
+- [Miguel González González][miguel] | Normalization and correlation | Final integration
+- [César Merino Fidalgo][cesar] | Model development | Final integration
+- [Miriam Cegarra Cuquerella][miriam] | Validation and model selection | Final integration
+- [Iris Mestres Pascual][iris] | API Development | Final integration
+- [Jan Carreras Boada][jan] | Deployment | Final integration
 
 [cesar]: <cesar.merino@estudiants.urv.cat>
 [clean_df]: ./data/cleaned_df.csv
