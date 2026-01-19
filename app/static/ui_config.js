@@ -83,9 +83,9 @@ window.UI_CONFIG = {
           description: "Age in years.",
           type: "range",
           min: 0,
-          max: 120,
+          max: 100,
           step: 1,
-          default: 28,
+          default: 45,
           valueType: "int"
         },
         {
@@ -115,12 +115,12 @@ window.UI_CONFIG = {
         {
           id: "cigs_per_day",
           label: "Cigarettes per day",
-          description: "Average number of cigarettes smoked per day.",
+          description: "Average number of cigarettes smoked per day (0 if non-smoker).",
           type: "range",
           min: 0,
-          max: 80,
+          max: 60,
           step: 1,
-          default: 0,
+          default: 1,
           valueType: "int"
         }
       ]
@@ -172,10 +172,10 @@ window.UI_CONFIG = {
             label: "Cholesterol",
             description: "Total cholesterol in mg/dL.",
             type: "range",
-            min: 0,
-            max: 999.9,
-            step: 0.1,
-            default: 220,
+            min: 100,
+            max: 500,
+            step: 1,
+            default: 200,
             valueType: "float"
         },
         {
@@ -183,10 +183,10 @@ window.UI_CONFIG = {
             label: "BMI",
             description: "Body mass index (kg/m²).",
             type: "range",
-            min: 5,
-            max: 200,
+            min: 15,
+            max: 50,
             step: 0.1,
-            default: 24.5,
+            default: 25.0,
             valueType: "float"
         },
         { 
@@ -194,10 +194,10 @@ window.UI_CONFIG = {
             label: "Systolic Blood Pressure",
             description: "Systolic blood pressure in mmHg.",
             type: "range",
-            min: 50,
-            max: 299.9,
-            step: 0.5,
-            default: 132,
+            min: 80,
+            max: 220,
+            step: 1,
+            default: 120,
             valueType: "float"
         },
         { 
@@ -205,10 +205,10 @@ window.UI_CONFIG = {
             label: "Diastolic Blood Pressure",
             description: "Diastolic blood pressure in mmHg.",
             type: "range",
-            min: 30,
-            max: 199.9,
+            min: 50,
+            max: 140,
             step: 1,
-            default: 83,
+            default: 80,
             valueType: "float"
         },
         {
@@ -216,8 +216,8 @@ window.UI_CONFIG = {
             label: "Heart Rate",
             description: "Heart rate (beats per minute).",
             type: "range",
-            min: 30,
-            max: 250,
+            min: 40,
+            max: 180,
             step: 1,
             default: 72,
             valueType: "int"
@@ -227,10 +227,10 @@ window.UI_CONFIG = {
             label: "Blood Glucose Level",
             description: "Blood glucose level in mg/dL.",
             type: "range",
-            min: 20,
-            max: 699.9,
-            step: 0.1,
-            default: 90,
+            min: 50,
+            max: 400,
+            step: 1,
+            default: 85,
             valueType: "float"
         }
       ]

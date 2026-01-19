@@ -1,10 +1,15 @@
-"""ADD DOCSTRING."""
+"""ADD DOCSTRING
+
+"""
 
 from pydantic import BaseModel, Field, ConfigDict
 
 
 class PredictRequest(BaseModel):
-    """ADD DOCSTRING."""
+    """
+    Input schema for the coronary heart disease prediction model.
+    Validation limits are based on realistic clinical values.
+    """
 
     sex: int = Field(
         ...,
@@ -18,16 +23,16 @@ class PredictRequest(BaseModel):
         ge=0,
         le=120,
         title="Age",
-        description="Subject's age. Age can range from 0 to up 120 years.",
+        description="Subject's age. Must be at least 18.",
     )
     education_level: int = Field(
         ...,
-        ge=0,
+        ge=1,
         le=4,
         title="Education Level",
         description=(
             "Subject's level of formal education. "
-            "It can range from 0 up to 4 (both inclusive)."
+            "It can range from 1 up to 4."
         ),
     )
     current_smoker: int = Field(
@@ -39,9 +44,10 @@ class PredictRequest(BaseModel):
     )
     cigs_per_day: int = Field(
         ...,
-        ge=0,
-        title="Cigarrets per Day",
-        description="Amount of cigarrets the subject smokes a day.",
+        ge=0,  
+        le=100,
+        title="Cigarettes per Day",
+        description="Average number of cigarettes smoked per day (0 if non-smoker).",
     )
     bp_meds: int = Field(
         ...,
@@ -78,62 +84,62 @@ class PredictRequest(BaseModel):
     )
     total_cholesterol: float = Field(
         ...,
-        gt=0,
-        le=1000,
+        ge=100, 
+        le=800,
         title="Total Cholesterol Level",
         description=(
             "Subject's total cholesterol level in mg/dL. "
-            "Its values range from 0 up to 1000 (both exclusive)."
+            "Normal range is typically between 100 and 600."
         ),
     )
     systolic_bp: float = Field(
         ...,
-        ge=50,
-        le=300,
+        ge=80,   
+        le=250,
         title="Systolic Blood Pressure",
         description=(
             "Subject's systolic blood pressure. "
-            "Its values range from 50 (inclusive) up to 300 (exclusive)."
+            "Values typically range from 80 to 220."
         ),
     )
     diastolic_bp: float = Field(
         ...,
-        ge=30,
-        le=200,
+        ge=40,   
+        le=160,
         title="Diastolic Blood Pressure",
         description=(
             "Subject's diastolic blood pressure. "
-            "Its values range from 30 (inclusive) up to 200 (exclusive)."
+            "Values typically range from 50 to 140."
         ),
     )
     bmi: float = Field(
         ...,
-        ge=5,
-        le=200,
+        ge=10,   
+        le=100,
         title="Body Mass Index (BMI)",
         description=(
             "Subject's body mass index. "
-            "It can range from 5 up to 200 (inclusive)."
+            "Values typically range from 15 to 50."
         ),
     )
     heart_rate: int = Field(
         ...,
-        ge=30,
-        le=250,
+        ge=30,   
+        le=220,
         title="Heart Rate",
         description=(
             "Subject's heart rate in beats per minute. "
-            "It can range from 30 up to 240 (inclusive)."
+            "Values typically range from 40 to 180."
         ),
     )
     glucose: float = Field(
         ...,
-        ge=20,
-        le=700,
+        ge=40,   
+        le=600,
         title="Blood Glucose Level",
         description=(
             "Subject's blood glucose level in mg/dL. "
-            "It can range from 20 (inclusive) up to 700 (exclusive)."
+            "Values typically range from 50 to 400."
         ),
     )
 
@@ -141,7 +147,9 @@ class PredictRequest(BaseModel):
 
 
 class PredictResponse(BaseModel):
-    """ADD DOCSTRING."""
+    """
+    Output schema containing the prediction and probability.
+    """
     prediction: int
     probability: float
     threshold: float
