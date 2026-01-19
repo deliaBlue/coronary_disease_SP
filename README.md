@@ -15,8 +15,60 @@ markers or features.
 
 ## Repository Structure
 
-ADD STRUCTURE
+This repository has been organized by grouping content in dedicated
+directories.
 
+- The `APP/` directory holds all the files required to use the model API. For
+  a complete overview of the `APP/` directory, please refer to its own
+  [README][docs_api].
+- The `DATA/` directory holds all the dataframes used and created during the
+  whole process:
+    - [`coronary_disease.csv`][raw_data]. The raw dataframe
+    - [`first_cleaned_df.csv`][first_data]. The first modified dataframe;
+      obtained after the data cleaning step.
+    - [`feat_engineered_df.csv`][feat_data]. The dataframe with the engineered
+      features; obtained after the feature engineering and exploratory data
+      analysis step.
+    - [`cleaned_df.csv`][cleaned_df]. Final version of the dataframe; obtained
+      after the normalization and correlation step.
+- The `MODEL/` directory holds the [final model][final_model] and the
+  JSON with the [feature schema][feature_schema] obtained in the validation
+  and model selection step.
+- The `NOTEBOOKS/` directory holds one reproducible jupyter notebook for each
+  of the stages.
+- The `SCRIPTS/` directory holds the script that merges all the steps done
+  in the different notebooks into a single executable script. Please, read
+  the script documentation for a detailed explanation.
+
+In addition, the root directory contains the README you are reading, the
+project [final report][report], and a [configuration file][pytest] for `pytest`
+to be able to perform the API tests.
+
+The structure of this repository can be seen in the tree below:
+
+```console
+coronary_disease_SP
+├── app
+├── data
+│   ├── cleaned_df.csv
+│   ├── coronary_disease.csv
+│   ├── feat_engineered_df.csv
+│   └── first_cleaned_df.csv
+├── model
+│   ├── feature_schema.json
+│   └── final_model.pkl
+├── notebooks
+│   ├── 0_data_cleaning.ipynb
+│   ├── 1_feat_engineering_and_eda.ipynb
+│   ├── 2_normalization_correlation.ipynb
+│   ├── 3_model_development.ipynb
+│   └── 4_validation_and_model_selection.ipynb
+├── pytest.ini
+├── README.md
+├── project_report.pdf
+└── scripts
+    └── train_and_export.py
+```
 
 ## Stages of the Project
 
@@ -287,12 +339,17 @@ The final model was trained on the full dataset and exported as
 
 [cesar]: <cesar.merino@estudiants.urv.cat>
 [clean_df]: ./data/cleaned_df.csv
+[docs_api]: ./app/README.md
 [feat_data]: ./data/feat_engineered_df.csv
+[feature_schema]: ./model/feature_schema.json
 [final_model]: ./model/final_model.pkl
+[first_data]: ./data/first_cleaned_df.csv
 [iris]: <iris.mestres@estudiants.urv.cat>
 [jan]: <jan.carreras@estudiants.urv.cat>
 [johanna]: <johanna.albers@estudiants.urv.cat>
 [miguel]: <miguel.gonzalez@estudiants.urv.cat>
 [miriam]: <miriam.cegarra@estudiants.urv.cat>
 [pol]: <pol.jardi@estudiants.urv.cat>
+[pytest]: pytest.ini
 [raw_data]: ./data/coronary_disease.csv
+[report]: project_report.pdf
