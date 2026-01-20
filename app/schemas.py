@@ -1,38 +1,54 @@
-"""ADD DOCSTRING
+"""Pydantic schemas for the coronary heart disease prediction API.
 
+This module defines the request and response models used by the FastAPI
+service.
+
+The models provide:
+    - input validation (types and numeric bounds) for inference requests
+    - OpenAPI/Swagger documentation via field titles and descriptions
+    - strict payload control (extra fields are forbidden) to keep the API
+      contract stable and predictable
+
+Models:
+    - `PredictRequest`: validated feature payload for inference
+    - `PredictResponse`: structured prediction output returned by the
+      `/predict` endpoint
 """
 
 from pydantic import BaseModel, Field, ConfigDict
 
 
 class PredictRequest(BaseModel):
-    """
-    Input schema for the coronary heart disease prediction model.
-    Validation limits are based on realistic clinical values.
-    """
+    """Input payload for coronary heart disease risk prediction.
 
+    Contains the patient's demographic, behavioral, and clinical measurements
+    required by the model pipeline. Each field enforces basic domain constraints
+    (e.g., non-negative values and plausible physiological ranges). Additional,
+    unspecified fields are rejected (`extra='forbid'`) to prevent silent schema
+    drift and to ensure the model receives only expected inputs.
+    """
     sex: int = Field(
         ...,
         ge=0,
         le=1,
         title="Gender",
-        description="Subject's gender. Set 0 for female, and 1 for male.",
+        description="Patient's gender. Set 0 for female, and 1 for male.",
     )
     age: int = Field(
         ...,
         ge=0,
         le=120,
         title="Age",
-        description="Subject's age. Must be at least 18.",
+        description="Patient's age. Age can range from 0 to up 120 years.",
     )
     education_level: int = Field(
         ...,
-        ge=1,
+        ge=0,
         le=4,
         title="Education Level",
         description=(
-            "Subject's level of formal education. "
-            "It can range from 1 up to 4."
+            "Patient's level of formal education. "
+            "It can range from 0 up to 4 (both inclusive)."
         ),
     )
     current_smoker: int = Field(
@@ -44,10 +60,10 @@ class PredictRequest(BaseModel):
     )
     cigs_per_day: int = Field(
         ...,
-        ge=0,  
-        le=100,
-        title="Cigarettes per Day",
-        description="Average number of cigarettes smoked per day (0 if non-smoker).",
+        ge=0,
+        le=100, 
+        title="Cigarrets per Day",
+        description="Amount of cigarrets the subject smokes a day.",
     )
     bp_meds: int = Field(
         ...,
@@ -84,62 +100,62 @@ class PredictRequest(BaseModel):
     )
     total_cholesterol: float = Field(
         ...,
-        ge=100, 
+        ge=100,
         le=800,
         title="Total Cholesterol Level",
         description=(
-            "Subject's total cholesterol level in mg/dL. "
-            "Normal range is typically between 100 and 600."
+            "Patient's total cholesterol level in mg/dL. "
+            "Its values range from 100 up to 800 (both exclusive)."
         ),
     )
     systolic_bp: float = Field(
         ...,
-        ge=80,   
+        ge=80,
         le=250,
         title="Systolic Blood Pressure",
         description=(
-            "Subject's systolic blood pressure. "
-            "Values typically range from 80 to 220."
+            "Patient's systolic blood pressure. "
+            "Its values range from 80 (inclusive) up to 250 (exclusive)."
         ),
     )
     diastolic_bp: float = Field(
         ...,
-        ge=40,   
+        ge=40,
         le=160,
         title="Diastolic Blood Pressure",
         description=(
-            "Subject's diastolic blood pressure. "
-            "Values typically range from 50 to 140."
+            "Patient's diastolic blood pressure. "
+            "Its values range from 40 (inclusive) up to 160 (exclusive)."
         ),
     )
     bmi: float = Field(
         ...,
-        ge=10,   
+        ge=10,
         le=100,
         title="Body Mass Index (BMI)",
         description=(
-            "Subject's body mass index. "
-            "Values typically range from 15 to 50."
+            "Patient's body mass index. "
+            "It can range from 10 up to 100 (inclusive)."
         ),
     )
     heart_rate: int = Field(
         ...,
-        ge=30,   
+        ge=30,
         le=220,
         title="Heart Rate",
         description=(
-            "Subject's heart rate in beats per minute. "
-            "Values typically range from 40 to 180."
+            "Patient's heart rate in beats per minute. "
+            "It can range from 30 up to 220 (inclusive)."
         ),
     )
     glucose: float = Field(
         ...,
-        ge=40,   
+        ge=40,
         le=600,
         title="Blood Glucose Level",
         description=(
-            "Subject's blood glucose level in mg/dL. "
-            "Values typically range from 50 to 400."
+            "Patient's blood glucose level in mg/dL. "
+            "It can range from 40 (inclusive) up to 600 (exclusive)."
         ),
     )
 
@@ -147,8 +163,16 @@ class PredictRequest(BaseModel):
 
 
 class PredictResponse(BaseModel):
-    """
-    Output schema containing the prediction and probability.
+    """Output payload returned by the prediction endpoint.
+
+    Attributes:
+        prediction: Binary class label produced by applying `threshold` to
+            `probability`
+        probability: Model-estimated probability of the positive class
+        threshold: Decision threshold used to convert probability to the
+            discrete `prediction`
+        model_version: Version identifier propagated from model metadata
+        roc_auc: ROC-AUC score reported in model metadata.
     """
     prediction: int
     probability: float

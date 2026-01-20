@@ -1,4 +1,13 @@
-"""ADD DOCSTRING."""
+"""Model bundle loader.
+
+This module provides a small, single-responsibility API for loading a
+serialized model pipeline and its accompanying metadata from a local `model/`
+directory that lives alongside this source file.
+
+Artifacts:
+    - `model/model_pipeline.pkl`: a Joblib-serialized pipeline object
+    - `model/metadata.json`: UTF-8 JSON metadata describing the pipeline
+"""
 
 from __future__ import annotations
 

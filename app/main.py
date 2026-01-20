@@ -1,4 +1,24 @@
-"""ADD DOCSTRING."""
+"""FastAPI application for coronary heart disease risk inference.
+
+This module defines a small web service that:
+    - Loads a trained model pipeline and its metadata once at application
+      startup
+    - Serves a simple HTML landing page rendered via Jinja2 templates
+    - Exposes health and prediction endpoints for operational monitoring and
+      programmatic inference
+
+Routes:
+    - `GET /`: Renders `templates/index.html` (static assets served from
+      `/static`)
+    - `GET /healthz`: Returns a lightweight readiness payload indicating
+      whether the model bundle is loaded and which model version is active
+    - `POST /predict`: Accepts a `PredictRequest` class, constructs
+      a 1-row pandas DataFrame in the raw feature order specified by model
+      metadata, and returns a `PredictResponse` class containing:
+        * probability for the positive class
+        * binary prediction using the configured threshold (default 0.5)
+        * model's ROC-AUC and version from metadata
+"""
 from __future__ import annotations
 
 from contextlib import asynccontextmanager

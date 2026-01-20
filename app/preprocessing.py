@@ -1,4 +1,23 @@
-"""ADD DOCSTRING."""
+"""Custom scikit-learn transformer for domain-specific feature engineering.
+
+This module defines `FeatureEngineer`, a lightweight transformer that derives
+additional clinical risk features from an input pandas DataFrame for use in a
+scikit-learn pipeline.
+
+The transformer is stateless (`fit` returns `self` without learning any new
+parameters) and returns a copy of the input pandas DataFrame with the new
+feature columns appended.
+
+Generated features:
+    - `smoker_intensity`: `current_smoker * cigs_per_day`
+    - `pulse_pressure`: `systolic_bp - diastolic_bp`
+
+Requirements:
+The input to `transform` must be a pandas DataFrame containing the columns
+`current_smoker`, `cigs_per_day`, `systolic_bp`, and `diastolic_bp`.
+
+Notes:
+"""
 from __future__ import annotations
 
 import pandas as pd
