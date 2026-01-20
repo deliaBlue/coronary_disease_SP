@@ -1,24 +1,45 @@
-"""ADD DOCSTRING."""
+"""Pydantic schemas for the coronary heart disease prediction API.
+
+This module defines the request and response models used by the FastAPI
+service.
+
+The models provide:
+    - input validation (types and numeric bounds) for inference requests
+    - OpenAPI/Swagger documentation via field titles and descriptions
+    - strict payload control (extra fields are forbidden) to keep the API
+      contract stable and predictable
+
+Models:
+    - `PredictRequest`: validated feature payload for inference
+    - `PredictResponse`: structured prediction output returned by the
+      `/predict` endpoint
+"""
 
 from pydantic import BaseModel, Field, ConfigDict
 
 
 class PredictRequest(BaseModel):
-    """ADD DOCSTRING."""
+    """Input payload for coronary heart disease risk prediction.
 
+    Contains the patient's demographic, behavioral, and clinical measurements
+    required by the model pipeline. Each field enforces basic domain constraints
+    (e.g., non-negative values and plausible physiological ranges). Additional,
+    unspecified fields are rejected (`extra='forbid'`) to prevent silent schema
+    drift and to ensure the model receives only expected inputs.
+    """
     sex: int = Field(
         ...,
         ge=0,
         le=1,
         title="Gender",
-        description="Subject's gender. Set 0 for female, and 1 for male.",
+        description="Patient's gender. Set 0 for female, and 1 for male.",
     )
     age: int = Field(
         ...,
         ge=0,
         le=120,
         title="Age",
-        description="Subject's age. Age can range from 0 to up 120 years.",
+        description="Patient's age. Age can range from 0 to up 120 years.",
     )
     education_level: int = Field(
         ...,
@@ -26,7 +47,7 @@ class PredictRequest(BaseModel):
         le=4,
         title="Education Level",
         description=(
-            "Subject's level of formal education. "
+            "Patient's level of formal education. "
             "It can range from 0 up to 4 (both inclusive)."
         ),
     )
@@ -82,7 +103,7 @@ class PredictRequest(BaseModel):
         le=1000,
         title="Total Cholesterol Level",
         description=(
-            "Subject's total cholesterol level in mg/dL. "
+            "Patient's total cholesterol level in mg/dL. "
             "Its values range from 0 up to 1000 (both exclusive)."
         ),
     )
@@ -92,7 +113,7 @@ class PredictRequest(BaseModel):
         le=300,
         title="Systolic Blood Pressure",
         description=(
-            "Subject's systolic blood pressure. "
+            "Patient's systolic blood pressure. "
             "Its values range from 50 (inclusive) up to 300 (exclusive)."
         ),
     )
@@ -102,7 +123,7 @@ class PredictRequest(BaseModel):
         le=200,
         title="Diastolic Blood Pressure",
         description=(
-            "Subject's diastolic blood pressure. "
+            "Patient's diastolic blood pressure. "
             "Its values range from 30 (inclusive) up to 200 (exclusive)."
         ),
     )
@@ -112,7 +133,7 @@ class PredictRequest(BaseModel):
         le=200,
         title="Body Mass Index (BMI)",
         description=(
-            "Subject's body mass index. "
+            "Patient's body mass index. "
             "It can range from 5 up to 200 (inclusive)."
         ),
     )
@@ -122,7 +143,7 @@ class PredictRequest(BaseModel):
         le=250,
         title="Heart Rate",
         description=(
-            "Subject's heart rate in beats per minute. "
+            "Patient's heart rate in beats per minute. "
             "It can range from 30 up to 240 (inclusive)."
         ),
     )
@@ -132,7 +153,7 @@ class PredictRequest(BaseModel):
         le=700,
         title="Blood Glucose Level",
         description=(
-            "Subject's blood glucose level in mg/dL. "
+            "Patient's blood glucose level in mg/dL. "
             "It can range from 20 (inclusive) up to 700 (exclusive)."
         ),
     )
@@ -141,7 +162,17 @@ class PredictRequest(BaseModel):
 
 
 class PredictResponse(BaseModel):
-    """ADD DOCSTRING."""
+    """Output payload returned by the prediction endpoint.
+
+    Attributes:
+        prediction: Binary class label produced by applying `threshold` to
+            `probability`
+        probability: Model-estimated probability of the positive class
+        threshold: Decision threshold used to convert probability to the
+            discrete `prediction`
+        model_version: Version identifier propagated from model metadata
+        roc_auc: ROC-AUC score reported in model metadata.
+    """
     prediction: int
     probability: float
     threshold: float
