@@ -1,4 +1,33 @@
-"""ADD DOSCTRING."""
+"""Training script for the coronary heart disease prediction model.
+
+This module trains and serializes a scikit-learn pipeline that predicts
+10-year coronary heart disease (CHD) risk from demographic, behavioral, and
+clinical measurements. It is intended to be run as a standalone program and
+produces two artifacts consumed by the FastAPI service:
+
+    - `app/model/model_pipeline.pkl`: a Joblib-serialized sklearn Pipeline
+    - `app/model/metadata.json`: JSON metadata describing the model contract,
+      feature set, evaluation metrics, and decision threshold
+
+High-level workflow:
+    1. Load the raw dataset from `data/coronary_disease.csv`
+    2. Normalize column names and encodings (snake_case, binary mappings) and
+       drop rows with missing values
+    3. Split data into train/test sets prior to fitting scalers to avoid data
+       leakage
+    4. Build a Pipeline consisting of:
+         - feature engineering (`FeatureEngineer`)
+         - column-wise scaling / passthrough (`ColumnTransformer`)
+         - logistic regression classifier
+    5. Evaluate on the held-out test set and persist artifacts
+
+Notes:
+    - The API contract is defined by `RAW_FEATS`; only these raw features are
+      required at inference time. Engineered features are computed inside the
+      Pipeline
+    - This script mutates `sys.path` so it can import the application
+      preprocessing module when executed from the repository root
+"""
 
 from __future__ import annotations
 
@@ -65,8 +94,26 @@ RAW_FEATS = [
 # AUXILIARY CLASSES
 @dataclass(frozen=True)
 class Metadata:
-    """ADD DOCSTRING."""
+    """Serializable training and model contract metadata.
 
+    This structure is written to `metadata.json` and is intended to be consumed
+    by the serving layer for:
+        - input feature ordering (raw feature contract)
+        - transparency about engineered and modeled features
+        - thresholding behavior
+        - reporting of offline evaluation metrics
+
+    Attributes:
+        version: Version identifier for the model/artifacts (training date)
+        target: Name of the target column used during training
+        raw_features: Ordered list of raw input features expected by the API
+        engineered_features: Names of features created in-pipeline
+        model_features_scaled: Feature names scaled via `StandardScaler`.
+        model_features_passthrough: Feature names passed through unscaled
+        threshold: Decision threshold used for binary classification
+        metrics: Evaluation metrics computed on a held-out test set
+        notes: Free-text notes describing pipeline behavior
+    """
     version: str
     target: str
     raw_features: List[str]
@@ -78,9 +125,22 @@ class Metadata:
     notes: str
 
 
-# AUXILIARY FUNCTIONS
+# AUXILIARY FUNCTION
 def clean_df(in_path: Path) -> pd.DataFrame:
-    """ADD DOCSTRING."""
+    """Load and normalize the raw coronary disease dataset.
+
+    Performs a minimal set of deterministic transformations to align the dataset
+    to the model's input contract:
+        - renames columns to match the service schema (snake_case)
+        - maps categorical encodings to numeric binaries where needed
+        - drops rows containing missing values.
+
+    Args:
+        in_path: Path to the CSV dataset.
+
+    Returns:
+        A cleaned pandas DataFrame suitable for model training and evaluation
+    """
     data = pd.read_csv(in_path)
 
     # Turn column names to snake_case and lowercase
@@ -120,7 +180,12 @@ def clean_df(in_path: Path) -> pd.DataFrame:
 
 
 def main():
-    """ADD DOCSTRING."""
+    """Train, evaluate, and persist the model pipeline and metadata.
+
+    Loads and cleans the dataset, performs a stratified train/test split, fits
+    a preprocessing and logistic regression pipeline, evaluates on the test set,
+    and writes the resulting artifacts to the ``app/model`` directory.
+    """
     data = clean_df(in_path=DATA_PATH)
 
     X = data[RAW_FEATS].copy()
