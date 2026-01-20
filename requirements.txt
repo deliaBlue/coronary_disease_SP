@@ -1,0 +1,10 @@
+fastapi[standard]
+jinja2
+joblib
+json
+matplotlib
+numpy
+pandas
+pytest
+scikit-learn
+seaborn

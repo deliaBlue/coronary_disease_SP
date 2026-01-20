@@ -1,0 +1,54 @@
+{
+  "version": "2026-01-18",
+  "target": "ten_year_chd",
+  "raw_features": [
+    "sex",
+    "age",
+    "education_level",
+    "current_smoker",
+    "cigs_per_day",
+    "bp_meds",
+    "prevalent_stroke",
+    "prevalent_hypertension",
+    "diabetes",
+    "total_cholesterol",
+    "systolic_bp",
+    "diastolic_bp",
+    "bmi",
+    "heart_rate",
+    "glucose"
+  ],
+  "engineered_features": [
+    "smoker_intensity",
+    "pulse_pressure"
+  ],
+  "model_features_scaled": [
+    "age",
+    "bmi",
+    "systolic_bp",
+    "diastolic_bp",
+    "total_cholesterol",
+    "glucose",
+    "heart_rate",
+    "pulse_pressure",
+    "smoker_intensity"
+  ],
+  "model_features_passthrough": [
+    "sex",
+    "education_level",
+    "current_smoker",
+    "bp_meds",
+    "prevalent_stroke",
+    "prevalent_hypertension",
+    "diabetes"
+  ],
+  "threshold": 0.5,
+  "metrics": {
+    "accuracy": "0.52",
+    "recall": "0.85",
+    "precision": "0.22",
+    "F1-score": "0.35",
+    "ROC-AUC": "0.73"
+  },
+  "notes": "API accepts raw_features only. Pipeline perfroms feat engineering, scaling, and classification."
+}
