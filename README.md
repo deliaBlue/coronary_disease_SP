@@ -29,7 +29,7 @@ directories.
     - [`feat_engineered_df.csv`][feat_data]. The dataframe with the engineered
       features; obtained after the feature engineering and exploratory data
       analysis step.
-    - [`cleaned_df.csv`][cleaned_df]. Final version of the dataframe; obtained
+    - [`cleaned_df.csv`][clean_df]. Final version of the dataframe; obtained
       after the normalization and correlation step.
 - The `MODEL/` directory holds the [final model][final_model] and the
   JSON with the [feature schema][feature_schema] obtained in the validation
