@@ -277,18 +277,19 @@ would be `422 Error: Unprocessable Content` with the following details:
 
 ## 4. (Deployed) API
 
-To ensure the application is accessible without local installation and to 
-guarantee reproducibility across different environments, we containerized 
-the application and deployed it to the cloud.
+We wanted to make this tool as accessible as possible without forcing anyone 
+to deal with local installations. To achieve this, and to make sure the app 
+runs exactly the same for everyone, we containerized the entire project and 
+moved it to the cloud.
 
 ### Docker Containerization
 
-We created a `Dockerfile` to encapsulate the operating system dependencies, 
-the Python environment, and the model artifacts. This solves the "it works 
-on my machine" problem by creating an isolated image that runs identically 
-everywhere.
+To dodge the classic "it works on my machine" headache, we used **Docker**. 
+By creating a `Dockerfile`, we bundled everything the app needs to run, 
+operating system dependencies, the Python environment and the trained 
+model artifacts, into one isolated image.
 
-The build process follows these steps:
+Here is the breakdown of our build process:
 1.  **Base Image**: We use `python:3.9-slim` to keep the image lightweight.
 2.  **Dependencies**: We copy `requirements.txt` and install packages.
 3.  **App & Model**: We copy the `app/` code and the trained `model/` 
@@ -296,8 +297,8 @@ directory into the container.
 4.  **Entrypoint**: The container launches the server using 
 `uvicorn app.main:app --host 0.0.0.0 --port 80`.
 
-To build and run the container locally (simulating the production environment), you can use:
-
+If you want to test the production environment locally, you can build and run 
+it with these commands:
 ```bash
 # Build the image
 docker build -t coronary-api .
@@ -308,13 +309,16 @@ docker run -p 8000:80 coronary-api
 
 ### Cloud Hosting (Render)
 
-The containerized application is hosted on Render, a unified cloud platform. 
-We configured a Continuous Deployment (CD) pipeline:
+For hosting, we chose Render because of how well it handles automation. 
+We set up a Continuous Deployment (CD) pipeline that works seamlessly 
+with our workflow:
 
-1. Render watches the `main` branch of this GitHub repository.
-2. When a new commit is merged (e.g., a model update or a UI fix), Render automatically pulls the changes.
-3. It builds the Docker image defined in the repository.
-4. It deploys the new version, replacing the old one with **zero downtime**.
+1. **Automatic Sync:** Render keeps an eye on the `main` branch of this
+   repository. 
+2. **Smart Updates:** Whenever we merge a new commit, Render automatically
+    pulls the changes.
+3. **Zero Downtime:** It builds the new Docker image and swaps the old version
+   for the new one without the API ever going offline.
 
 ### Live Access
 
@@ -324,8 +328,8 @@ The API is publicly available at:
 
 You can interact with it exactly as you would locally:
 
-- **UI**: Open the URL in your browser.
-- **Docs**: Go to `/docs` or `/redoc`.
+- **Interactive UI**: Open the URL in your browser.
+- **Documentation**: Go to `/docs` or `/redoc`.
 - **Inference**: Send `POST` requests to `/predict`.
 
 > **Important Note on Cold Starts**  
