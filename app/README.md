@@ -341,6 +341,11 @@ You can interact with it exactly as you would locally:
 > The first request after a period of inactivity may take up to **50 seconds** to process while the container wakes up.  
 > Subsequent requests will be instant.
 
+### Demo Video
+
+Click the image below to watch the API in action:
+
+[![Watch the video](https://img.youtube.com/vi/_6PeSIqIeps/maxresdefault.jpg)](https://youtu.be/_6PeSIqIeps)
 
 ## 5. UI
 
