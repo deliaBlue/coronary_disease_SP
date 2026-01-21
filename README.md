@@ -331,6 +331,16 @@ using FastAPI with a user interface in order to ease the user's input process.
 
 ### Deployment
 
+To ensure the application is accessible and reproducible, we containerized the 
+API using **Docker**. A `Dockerfile` was created to encapsulate the environment, 
+dependencies, and the model pipeline, ensuring consistent behavior independent of 
+the host machine. The containerized application was then deployed to the cloud using 
+**Render**. This allows the predictive model to be accessed publicly via a web
+ interface, removing the need for local installation and enabling real-time usage.
+
+For further technical details and instructions on the cloud configuration, please refer 
+to the **[(Deployed) API][docs_deploy]** section within the specific App documentation.
+
 
 ## Collaborators
 
@@ -359,3 +369,4 @@ using FastAPI with a user interface in order to ease the user's input process.
 [raw_data]: ./data/coronary_disease.csv
 [report]: project_report.pdf
 [script]: ./scripts/train_and_export.py
+[docs_deploy]: ./app/README.md#deployed-api
