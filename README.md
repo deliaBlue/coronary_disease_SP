@@ -49,25 +49,35 @@ The structure of this repository can be seen in the tree below:
 ```console
 coronary_disease_SP
 ├── app
+│   ├── model
+│   ├── static
+│   ├── templates
+│   ├── tests
+│   ├── Dockerfile
+│   ├── main.py
+│   ├── preprocessing.py
+│   ├── README.md
+│   └── requirements.txt
 ├── data
-│   ├── cleaned_df.csv
-│   ├── coronary_disease.csv
-│   ├── feat_engineered_df.csv
-│   └── first_cleaned_df.csv
+│   ├── cleaned_df.csv
+│   ├── coronary_disease.csv
+│   ├── feat_engineered_df.csv
+│   └── first_cleaned_df.csv
 ├── model
-│   ├── feature_schema.json
-│   └── final_model.pkl
+│   ├── feature_schema.json
+│   └── final_model.pkl
 ├── notebooks
-│   ├── 0_data_cleaning.ipynb
-│   ├── 1_feat_engineering_and_eda.ipynb
-│   ├── 2_normalization_correlation.ipynb
-│   ├── 3_model_development.ipynb
-│   └── 4_validation_and_model_selection.ipynb
+│   ├── 0_data_cleaning.ipynb
+│   ├── 1_feat_engineering_and_eda.ipynb
+│   ├── 2_normalization_correlation.ipynb
+│   ├── 3_model_development.ipynb
+│   └── 4_validation_and_model_selection.ipynb
+├── scripts
+│   └── train_and_export.py
 ├── pytest.ini
 ├── README.md
-├── project_report.pdf
-└── scripts
-    └── train_and_export.py
+├── requirements.txt
+└── project_report.pdf
 ```
 
 ## Stages of the Project
