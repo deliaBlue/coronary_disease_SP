@@ -331,15 +331,21 @@ using FastAPI with a user interface in order to ease the user's input process.
 
 ### Deployment
 
-To ensure the application is accessible and reproducible, we containerized the 
-API using **Docker**. A `Dockerfile` was created to encapsulate the environment, 
-dependencies, and the model pipeline, ensuring consistent behavior independent of 
-the host machine. The containerized application was then deployed to the cloud using 
-**Render**. This allows the predictive model to be accessed publicly via a web
- interface, removing the need for local installation and enabling real-time usage.
+To make sure the application is both accessible and easy to reproduce, we 
+containerized the API using **Docker**. By creating a dedicated `Dockerfile`, 
+we bundled the entire environment, dependencies, and our model pipeline into 
+a single package. This guarantees that the tool performs consistently, 
+no matter where it's running.
 
-For further technical details and instructions on the cloud configuration, please refer 
-to the **[(Deployed) API][docs_deploy]** section within the specific App documentation.
+For the final step, we deployed the containerized app to the cloud using 
+**Render**. This moves the predictive model from a local setup to a public 
+web interface, allowing anyone to interact with it in real-time without 
+needing to install anything locally.
+
+**Note**  
+For a deeper dive into the technical setup or cloud configuration, 
+feel free to check out the **[(Deployed) API][docs_deploy]** section in 
+the App documentation.
 
 
 ## Collaborators
