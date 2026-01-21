@@ -43,12 +43,12 @@ class PredictRequest(BaseModel):
     )
     education_level: int = Field(
         ...,
-        ge=0,
+        ge=1,
         le=4,
         title="Education Level",
         description=(
             "Patient's level of formal education. "
-            "It can range from 0 up to 4 (both inclusive)."
+            "It can range from 1 up to 4 (both inclusive)."
         ),
     )
     current_smoker: int = Field(
