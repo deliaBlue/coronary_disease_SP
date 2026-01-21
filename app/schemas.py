@@ -43,12 +43,12 @@ class PredictRequest(BaseModel):
     )
     education_level: int = Field(
         ...,
-        ge=0,
+        ge=1,
         le=4,
         title="Education Level",
         description=(
             "Patient's level of formal education. "
-            "It can range from 0 up to 4 (both inclusive)."
+            "It can range from 1 up to 4 (both inclusive)."
         ),
     )
     current_smoker: int = Field(
@@ -61,6 +61,7 @@ class PredictRequest(BaseModel):
     cigs_per_day: int = Field(
         ...,
         ge=0,
+        le=100, 
         title="Cigarrets per Day",
         description="Amount of cigarrets the subject smokes a day.",
     )
@@ -99,62 +100,62 @@ class PredictRequest(BaseModel):
     )
     total_cholesterol: float = Field(
         ...,
-        gt=0,
-        le=1000,
+        ge=100,
+        le=800,
         title="Total Cholesterol Level",
         description=(
             "Patient's total cholesterol level in mg/dL. "
-            "Its values range from 0 up to 1000 (both exclusive)."
+            "Its values range from 100 up to 800 (both exclusive)."
         ),
     )
     systolic_bp: float = Field(
         ...,
-        ge=50,
-        le=300,
+        ge=80,
+        le=250,
         title="Systolic Blood Pressure",
         description=(
             "Patient's systolic blood pressure. "
-            "Its values range from 50 (inclusive) up to 300 (exclusive)."
+            "Its values range from 80 (inclusive) up to 250 (exclusive)."
         ),
     )
     diastolic_bp: float = Field(
         ...,
-        ge=30,
-        le=200,
+        ge=40,
+        le=160,
         title="Diastolic Blood Pressure",
         description=(
             "Patient's diastolic blood pressure. "
-            "Its values range from 30 (inclusive) up to 200 (exclusive)."
+            "Its values range from 40 (inclusive) up to 160 (exclusive)."
         ),
     )
     bmi: float = Field(
         ...,
-        ge=5,
-        le=200,
+        ge=10,
+        le=100,
         title="Body Mass Index (BMI)",
         description=(
             "Patient's body mass index. "
-            "It can range from 5 up to 200 (inclusive)."
+            "It can range from 10 up to 100 (inclusive)."
         ),
     )
     heart_rate: int = Field(
         ...,
         ge=30,
-        le=250,
+        le=220,
         title="Heart Rate",
         description=(
             "Patient's heart rate in beats per minute. "
-            "It can range from 30 up to 240 (inclusive)."
+            "It can range from 30 up to 220 (inclusive)."
         ),
     )
     glucose: float = Field(
         ...,
-        ge=20,
-        le=700,
+        ge=40,
+        le=600,
         title="Blood Glucose Level",
         description=(
             "Patient's blood glucose level in mg/dL. "
-            "It can range from 20 (inclusive) up to 700 (exclusive)."
+            "It can range from 40 (inclusive) up to 600 (exclusive)."
         ),
     )
 

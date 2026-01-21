@@ -56,6 +56,7 @@
 
     if (field.type === "range") {
       const row = el("div", { class: "row" });
+      
       const num = el("input", {
         id: field.id + "_num",
         type: "number",
@@ -74,24 +75,17 @@
         value: String(field.default)
       });
 
-      const out = el("span", {
-          id: field.id + "_val",
-          class: "val",
-          html: String(field.default)
-      });
 
       slider.addEventListener("input", () => {
         num.value = slider.value;
-        out.textContent = slider.value;
       });
       num.addEventListener("input", () => {
         slider.value = num.value;
-        out.textContent = num.value;
       });
 
       row.appendChild(num);
       row.appendChild(slider);
-      row.appendChild(out);
+      
       wrap.appendChild(row);
       return wrap;
     }
@@ -182,7 +176,6 @@
       ? cfg.result.summaryTemplate(data)
       : `Probability: ${data.probability}`;
 
-    // Risk coloring
     const band = riskBand(data.probability);
     const styles = getComputedStyle(document.documentElement);
 
@@ -196,7 +189,6 @@
     renderJsonTable(data);
   }
 
-// Reset to defaults
   function reset() {
     for (const section of cfg.sections) {
       for (const f of section.fields) {
@@ -205,7 +197,6 @@
         } else if (f.type === "range") {
           document.getElementById(f.id).value = String(f.default);
           document.getElementById(f.id + "_num").value = String(f.default);
-          document.getElementById(f.id + "_val").textContent = String(f.default);
         }
       }
     }
