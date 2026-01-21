@@ -309,7 +309,11 @@ docker run -p 8000:80 coronary-api
 
 ### Cloud Hosting (Render)
 
-For hosting, we chose Render because of how well it handles automation. 
+Initially, we planned to go a different route and host the project using FastAPI
+Cloud. We even signed up for their waiting list, but after waiting for a response that 
+never came, we decided to pivot to **Render** to keep the momentum going.
+
+We chose Render because of how well it handles automation. 
 We set up a Continuous Deployment (CD) pipeline that works seamlessly 
 with our workflow:
 
