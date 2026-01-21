@@ -369,4 +369,4 @@ to the **[(Deployed) API][docs_deploy]** section within the specific App documen
 [raw_data]: ./data/coronary_disease.csv
 [report]: project_report.pdf
 [script]: ./scripts/train_and_export.py
-[docs_deploy]: ./app/README.md#deployed-api
+[docs_deploy]: ./app/README.md#4-deployed-api
