@@ -6,6 +6,11 @@ In this repository you will find how we develop an API for a robust and accurate
 **predictive model for use in coronary disease diagnosis** based on specific
 markers or features.
 
+  
+![API](https://github.com/user-attachments/assets/2efa60aa-967b-447e-a6d1-43db8fcd1350)
+
+
+
 ## Table of Contents
 
 1. [Repository Structure](#repository-structure)
